@@ -1,0 +1,16 @@
+(base) mozaki@goku:~/001_CODE/900_Study/000_udacity/001_cloud_fundation/nd064_course_1/project$ docker build -t flask-app .
+
+(base) mozaki@goku:~/001_CODE/900_Study/000_udacity/001_cloud_fundation/nd064_course_1/project$ docker run -d -p 3111:3111 techtrends
+f1417636f936d4b4c4d51140e06a69b3d8cf3ff9ebf42c6f6036dd6912230fa4
+docker: Error response from daemon: driver failed programming external connectivity on endpoint practical_hugle (954a718e80431ac1ec1aaceeadacbd5442d41a9dd7e18b333ad54a06116be901): Bind for 0.0.0.0:3111 failed: port is already allocated.
+(base) mozaki@goku:~/001_CODE/900_Study/000_udacity/001_cloud_fundation/nd064_course_1/project$
+
+(base) mozaki@goku:~/001_CODE/900_Study/000_udacity/001_cloud_fundation/nd064_course_1/project$ docker ps | grep flask
+8c08830207cc   flask-app                                                                                      "sh -c 'python init_…"   6 minutes ago   Up 6 minutes   0.0.0.0:3111->3111/tcp, :::3111->3111/tcp   clever_mendeleev
+(base) mozaki@goku:~/001_CODE/900_Study/000_udacity/001_cloud_fundation/nd064_course_1/project$ docker stop 8c08830207cc
+8c08830207cc
+(base) mozaki@goku:~/001_CODE/900_Study/000_udacity/001_cloud_fundation/nd064_course_1/project$ docker rm 8c08830207cc
+8c08830207cc
+(base) mozaki@goku:~/001_CODE/900_Study/000_udacity/001_cloud_fundation/nd064_course_1/project$ docker run -d -p 3111:3111 techtrends
+761c61f31315f2f6c7550c00746e624166eb4775835b61e746dd873c10704eea
+(base) mozaki@goku:~/001_CODE/900_Study/000_udacity/001_cloud_fundation/nd064_course_1/project$ 
