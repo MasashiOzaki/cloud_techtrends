@@ -1,0 +1,13 @@
+(base) mozaki@goku:~/001_CODE/900_Study/000_udacity/001_cloud_fundation/nd064_course_1/project/techtrends$ python app.py
+ * Serving Flask app 'app'
+ * Debug mode: off
+INFO:werkzeug:WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:3111
+ * Running on http://10.166.20.84:3111
+INFO:werkzeug:Press CTRL+C to quit
+INFO:td_app:db_connection_count: 1, post_count: 6
+INFO:werkzeug:10.87.130.239 - - [05/Aug/2024 23:03:46] "GET /metrics HTTP/1.1" 200 -
+INFO:td_app:/healthz response: {'result': 'OK - healthy'}
+INFO:werkzeug:10.87.130.239 - - [05/Aug/2024 23:03:56] "GET /healthz HTTP/1.1" 200 -
+:
