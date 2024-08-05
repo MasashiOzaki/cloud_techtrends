@@ -1,7 +1,15 @@
 import sqlite3
-
+import logging
 from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash
 from werkzeug.exceptions import abort
+
+# Initialize the Flask application
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'your secret key'
+
+# Setup the logger
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger('td_app')
 
 # Global variable to keep track of the number of database connections
 db_connection_count = 0
@@ -19,13 +27,9 @@ def get_db_connection():
 def get_post(post_id):
     connection = get_db_connection()
     post = connection.execute('SELECT * FROM posts WHERE id = ?',
-                        (post_id,)).fetchone()
+                              (post_id,)).fetchone()
     connection.close()
     return post
-
-# Define the Flask application
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your secret key'
 
 # Define the main route of the web application 
 @app.route('/')
@@ -41,9 +45,9 @@ def index():
 def post(post_id):
     post = get_post(post_id)
     if post is None:
-      return render_template('404.html'), 404
+        return render_template('404.html'), 404
     else:
-      return render_template('post.html', post=post)
+        return render_template('post.html', post=post)
 
 # Define the About Us page
 @app.route('/about')
@@ -62,7 +66,7 @@ def create():
         else:
             connection = get_db_connection()
             connection.execute('INSERT INTO posts (title, content) VALUES (?, ?)',
-                         (title, content))
+                               (title, content))
             connection.commit()
             connection.close()
 
@@ -73,11 +77,13 @@ def create():
 # Define the main route of the web application 
 @app.route('/healthz')
 def status():
+    response_content = {"result": "OK - healthy"}
     response = app.response_class(
-        response=json.dumps({"result":"OK - healthy"}),
+        response=json.dumps(response_content),
         status=200,
         mimetype="application/json"
     )
+    logger.info(f"/healthz response: {response_content}")  # Log the response content
     return response
 
 @app.route('/metrics')
@@ -86,13 +92,15 @@ def metrics():
     post_count = connection.execute('SELECT COUNT(*) FROM posts').fetchone()[0]
     connection.close()
     
+    response_content = {"db_connection_count": db_connection_count, "post_count": post_count}
     response = app.response_class(
-            response=json.dumps({"db_connection_count": db_connection_count, "post_count": post_count}),
+            response=json.dumps(response_content),
             status=200,
             mimetype='application/json'
     )
+    logger.info(f"db_connection_count: {db_connection_count}, post_count: {post_count}")  # Log the response content
     return response
 
-# start the application on port 3111
+# Start the application on port 3111
 if __name__ == "__main__":
-   app.run(host='0.0.0.0', port='3111')
+    app.run(host='0.0.0.0', port='3111')
