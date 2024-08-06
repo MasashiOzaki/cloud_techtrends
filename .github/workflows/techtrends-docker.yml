@@ -37,3 +37,5 @@ jobs:
           file: ./project/Dockerfile
           push: true
           tags: masashiozaki/cloud_native_techtrends:latest
+          # context: path to run docker run command.
+          # file: path to the Dockerfile from top dir
