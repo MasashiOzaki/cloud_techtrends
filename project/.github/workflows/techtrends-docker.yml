@@ -33,7 +33,7 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v2
         with:
-          path: ./project/techtrends
-          file: ./project/Dockerfile
+          path: ./techtrends
+          file: ./Dockerfile
           push: true
           tags: masashiozaki/cloud_native_techtrends:latest
