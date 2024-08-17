@@ -5,6 +5,6 @@ version: 1.0.0
 keywords:
   - techtrends
 maintainers:
-  - name: masashi
+  - name: masashiozaki
     email: masashi.ozaki.te@renesas.com
 description: TechTrendsアプリケーションをデプロイするためのHelmチャート
