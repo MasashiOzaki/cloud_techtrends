@@ -1,0 +1,10 @@
+# helm/Chart.yaml
+apiVersion: v1
+name: techtrends
+version: 1.0.0
+keywords:
+  - techtrends
+maintainers:
+  - name: masashi
+    email: masashi.ozaki.te@renesas.com
+description: TechTrendsアプリケーションをデプロイするためのHelmチャート
