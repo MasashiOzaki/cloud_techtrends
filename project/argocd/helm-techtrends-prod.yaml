@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: techtrends-prod
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/MasashiOzaki/cloud_techtrends'
+    targetRevision: HEAD
+    path: 'project/helm' # Helmチャートが保存されているパス
+    helm:
+      valueFiles:
+        - values-prod.yaml # プロダクション環境用のvaluesファイル
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: techtrends-prod # プロダクション用のKubernetesネームスペース
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
